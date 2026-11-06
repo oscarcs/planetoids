@@ -1,0 +1,70 @@
+name: Publish to Hangar
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
+    secrets:
+      HANGAR_API_TOKEN:
+        required: true
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing GitHub release tag to publish (for example, 1.0)
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hangar-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Use current publishing configuration, while uploading the exact existing release artifact.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: gradle
+
+      - name: Prepare release
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
+        run: |
+          if [[ -z "$HANGAR_API_TOKEN" ]]; then
+            echo 'Add the HANGAR_API_TOKEN repository secret before publishing.' >&2
+            exit 1
+          fi
+          version="${RELEASE_TAG#v}"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+            echo 'Hangar Release publishing requires a stable numeric version tag.' >&2
+            exit 1
+          fi
+          gh release download "$RELEASE_TAG" --pattern "planetoids-$version.jar" --dir dist
+          echo "RELEASE_VERSION=$version" >> "$GITHUB_ENV"
+          echo "RELEASE_NOTES=https://github.com/$GH_REPO/releases/tag/$RELEASE_TAG" >> "$GITHUB_ENV"
+
+      - name: Publish tested release to Hangar
+        env:
+          HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
+        run: |
+          ./gradlew --no-daemon :paper:publishPluginPublicationToHangar \
+            "-Pversion=$RELEASE_VERSION" \
+            "-PhangarJar=$GITHUB_WORKSPACE/dist/planetoids-$RELEASE_VERSION.jar" \
+            "-PhangarChangelog=$RELEASE_NOTES"

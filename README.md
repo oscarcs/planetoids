@@ -16,7 +16,9 @@ Set `JAVA_HOME` to JDK 25, then run:
 
 The plugin JAR is in `paper/build/libs/`. It includes the standalone `core` library. Run `./gradlew test` to run tests separately. Gradle and dependencies are downloaded automatically on the first build.
 
-GitHub Actions builds and tests pushes and pull requests. Version tags (for example, `1.0` or `v1.1`) publish the tested plugin JAR to [GitHub Releases](https://github.com/oscarcs/planetoids/releases); the tag must match `version` in `gradle.properties` (with an optional `v` prefix).
+GitHub Actions builds and tests pushes and pull requests. Version tags (for example, `1.0` or `v1.1`) publish the tested plugin JAR to [GitHub Releases](https://github.com/oscarcs/planetoids/releases) and [Hangar](https://hangar.papermc.io/oscarcs/planetoids); the tag must match `version` in `gradle.properties` (with an optional `v` prefix).
+
+Hangar publishing uses the `HANGAR_API_TOKEN` repository secret, with `create_version` permission for this project. To publish an existing GitHub release, run the **Publish to Hangar** action with its tag.
 
 ## Run locally
 

@@ -1,5 +1,8 @@
+import io.papermc.hangarpublishplugin.model.Platforms
+
 plugins {
     `java-library`
+    id("io.papermc.hangar-publish-plugin") version "0.1.4"
 }
 
 repositories {
@@ -25,5 +28,26 @@ tasks.processResources {
     inputs.property("version", pluginVersion)
     filesMatching("plugin.yml") {
         expand("version" to pluginVersion)
+    }
+}
+
+hangarPublish {
+    publications.register("plugin") {
+        version.set(project.version.toString())
+        id.set("planetoids")
+        channel.set("Release")
+        apiKey.set(providers.environmentVariable("HANGAR_API_TOKEN"))
+        changelog.set(providers.gradleProperty("hangarChangelog").orElse("See the GitHub release notes."))
+
+        platforms {
+            register(Platforms.PAPER) {
+                jar.set(
+                    providers.gradleProperty("hangarJar")
+                        .map { layout.projectDirectory.file(it) }
+                        .orElse(tasks.jar.flatMap { it.archiveFile })
+                )
+                platformVersions.set(listOf("26.3"))
+            }
+        }
     }
 }
