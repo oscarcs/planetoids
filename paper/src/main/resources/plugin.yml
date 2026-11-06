@@ -1,0 +1,10 @@
+name: Planetoids
+version: '${version}'
+main: dev.planetoids.paper.PlanetoidsPlugin
+api-version: '26.3'
+load: STARTUP
+description: Deterministic floating planets
+commands:
+  planetoids:
+    description: Show resource destinations and progression hints
+    usage: /planetoids guide

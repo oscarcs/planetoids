@@ -1,0 +1,240 @@
+# Use a fresh world after changing geometry, weights, palette order or materials.
+# Classic world base. Height is the absolute Y of the top liquid block.
+# Depth counts liquid layers only; one bedrock layer is placed at height - depth.
+# Changing these settings requires a fresh world.
+base:
+  mode: nothing # nothing, water or lava
+  height: -60
+  depth: 3
+# Reserved starter planets, challenge outposts and an Eye-locatable End portal.
+progression:
+  enabled: true
+  # Attach vault islands only to this End dimension; other custom worlds are untouched.
+  end-world-key: minecraft:the_end
+cell-size: 64
+min-radius: 12
+max-radius: 26
+gap: 6
+crust-thickness: 3
+# Weighted resource destinations, inspired by Seibai's offline Planetoids generator.
+# Rare ore cores are rich rewards; weights describe planets, not individual blocks.
+planets:
+  - name: oak tree
+    weight: 8
+    crust: OAK_LEAVES
+    core: OAK_LOG
+  - name: spruce tree
+    weight: 3
+    crust: SPRUCE_LEAVES
+    core: SPRUCE_LOG
+  - name: birch tree
+    weight: 3
+    crust: BIRCH_LEAVES
+    core: BIRCH_LOG
+  - name: jungle tree
+    weight: 2
+    crust: JUNGLE_LEAVES
+    core: JUNGLE_LOG
+  - name: acacia tree
+    weight: 1
+    crust: ACACIA_LEAVES
+    core: ACACIA_LOG
+  - name: dark_oak tree
+    weight: 2
+    crust: DARK_OAK_LEAVES
+    core: DARK_OAK_LOG
+  - name: mangrove tree
+    weight: 1
+    crust: MANGROVE_LEAVES
+    core: MANGROVE_LOG
+  - name: cherry tree
+    weight: 2
+    crust: CHERRY_LEAVES
+    core: CHERRY_LOG
+  - name: pale_oak tree
+    weight: 1
+    crust: PALE_OAK_LEAVES
+    core: PALE_OAK_LOG
+  - name: red poplar tree
+    weight: 1
+    crust: RED_POPLAR_LEAVES
+    core: POPLAR_LOG
+  - name: orange poplar tree
+    weight: 1
+    crust: ORANGE_POPLAR_LEAVES
+    core: POPLAR_LOG
+  - name: yellow poplar tree
+    weight: 1
+    crust: YELLOW_POPLAR_LEAVES
+    core: POPLAR_LOG
+  - name: earth
+    weight: 20
+    crust: DIRT
+    core: DIRT
+    surface: GRASS_BLOCK
+  - name: moss
+    weight: 4
+    crust: MOSS_BLOCK
+    core: ROOTED_DIRT
+  - name: clay
+    weight: 4
+    crust: CLAY
+    core: CLAY
+  - name: supported sand
+    weight: 4
+    crust: SAND
+    core: SAND
+    bottom: CLAY
+  - name: supported red sand
+    weight: 2
+    crust: RED_SAND
+    core: RED_SAND
+    bottom: RED_SANDSTONE
+  - name: coal ore
+    weight: 16
+    crust: STONE
+    core: COAL_ORE
+  - name: iron ore
+    weight: 10
+    crust: STONE
+    core: IRON_ORE
+  - name: copper ore
+    weight: 10
+    crust: STONE
+    core: COPPER_ORE
+  - name: redstone ore
+    weight: 5
+    crust: STONE
+    core: REDSTONE_ORE
+  - name: lapis ore
+    weight: 4
+    crust: STONE
+    core: LAPIS_ORE
+  - name: gold ore
+    weight: 3
+    crust: STONE
+    core: GOLD_ORE
+  - name: diamond ore
+    weight: 1
+    crust: STONE
+    core: DIAMOND_ORE
+  - name: emerald ore
+    weight: 1
+    crust: STONE
+    core: EMERALD_ORE
+  - name: deepslate coal
+    weight: 2
+    crust: DEEPSLATE
+    core: DEEPSLATE_COAL_ORE
+  - name: deepslate iron
+    weight: 5
+    crust: DEEPSLATE
+    core: DEEPSLATE_IRON_ORE
+  - name: deepslate copper
+    weight: 3
+    crust: DEEPSLATE
+    core: DEEPSLATE_COPPER_ORE
+  - name: deepslate redstone
+    weight: 3
+    crust: DEEPSLATE
+    core: DEEPSLATE_REDSTONE_ORE
+  - name: deepslate lapis
+    weight: 2
+    crust: DEEPSLATE
+    core: DEEPSLATE_LAPIS_ORE
+  - name: deepslate gold
+    weight: 2
+    crust: DEEPSLATE
+    core: DEEPSLATE_GOLD_ORE
+  - name: deepslate diamond
+    weight: 1
+    crust: DEEPSLATE
+    core: DEEPSLATE_DIAMOND_ORE
+  - name: deepslate emerald
+    weight: 1
+    crust: DEEPSLATE
+    core: DEEPSLATE_EMERALD_ORE
+  - name: gravel
+    weight: 4
+    crust: STONE
+    core: GRAVEL
+  - name: water vessel
+    weight: 7
+    crust: GLASS
+    core: WATER
+  - name: lava reservoir
+    weight: 3
+    crust: STONE
+    core: LAVA
+  - name: empty glass vessel
+    weight: 2
+    crust: GLASS
+    core: AIR
+  - name: tuff
+    weight: 3
+    crust: TUFF
+    core: RAW_IRON_BLOCK
+  - name: copper vein
+    weight: 3
+    crust: TUFF
+    core: RAW_COPPER_BLOCK
+  - name: amethyst
+    weight: 3
+    crust: CALCITE
+    core: AMETHYST_BLOCK
+  - name: renewable amethyst
+    weight: 1
+    crust: SMOOTH_BASALT
+    core: BUDDING_AMETHYST
+  - name: sulfur
+    weight: 3
+    crust: SULFUR
+    core: SULFUR
+  - name: cinnabar
+    weight: 3
+    crust: CINNABAR
+    core: CINNABAR
+  - name: resin
+    weight: 1
+    crust: PALE_OAK_LOG
+    core: RESIN_BLOCK
+  - name: prismarine
+    weight: 2
+    crust: PRISMARINE
+    core: SEA_LANTERN
+  - name: glowstone
+    weight: 3
+    crust: GLOWSTONE
+    core: GLOWSTONE
+  - name: snow
+    weight: 3
+    crust: SNOW_BLOCK
+    core: PACKED_ICE
+  - name: ice
+    weight: 2
+    crust: PACKED_ICE
+    core: BLUE_ICE
+  - name: terracotta
+    weight: 2
+    crust: TERRACOTTA
+    core: TERRACOTTA
+  - name: basalt
+    weight: 2
+    crust: BASALT
+    core: BLACKSTONE
+  - name: nether quartz
+    weight: 3
+    crust: NETHERRACK
+    core: NETHER_QUARTZ_ORE
+  - name: nether gold
+    weight: 2
+    crust: NETHERRACK
+    core: NETHER_GOLD_ORE
+  - name: ancient debris
+    weight: 1
+    crust: BLACKSTONE
+    core: ANCIENT_DEBRIS
+  - name: end stone
+    weight: 1
+    crust: END_STONE
+    core: OBSIDIAN
