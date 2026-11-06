@@ -4,7 +4,7 @@ plugins {
 
 allprojects {
     group = "dev.planetoids"
-    version = "0.3.0"
+    version = rootProject.providers.gradleProperty("version").get()
     repositories {
         mavenCentral()
     }
